@@ -15,7 +15,7 @@ endif
 
 # COMMON CONFIGURATION #
 
-NAME := InputProc
+NAME := ButtonSwap3DS
 
 BUILD_DIR := build
 OUTPUT_DIR := output
@@ -33,10 +33,10 @@ RUN_FLAGS :=
 # 3DS CONFIGURATION #
 
 TITLE := $(NAME) $(TYPE)
-DESCRIPTION := Relays input for the wifi thing. Go away.
-AUTHOR := Stary
-PRODUCT_CODE := CTR-P-CINP
-UNIQUE_ID := 0x96e7f
+DESCRIPTION := Swaps buttons
+AUTHOR := Stary & MikahJC
+PRODUCT_CODE := CTR-P-BTS3
+UNIQUE_ID := 0x96e9e
 
 SYSTEM_MODE := 64MB
 SYSTEM_MODE_EXT := Legacy
@@ -59,7 +59,7 @@ clean_ntr:
 
 ntr:
 	sed -i 's/MemoryType                    : Base/MemoryType                    : Application/' buildtools/3ds/template.rsf
-	make BUILD_DIR=build_ntr OUTPUT_DIR=output_ntr BUILD_FLAGS=-DNTR UNIQUE_ID=0x96e7e ICON=meta/icon_ntr.png TYPE=NTR
+	make BUILD_DIR=build_ntr OUTPUT_DIR=output_ntr BUILD_FLAGS=-DNTR UNIQUE_ID=0x96e9f ICON=meta/icon_ntr.png TYPE=NTR
 
 hbl:
 	sed -i 's/MemoryType                    : Application/MemoryType                    : Base/' buildtools/3ds/template.rsf
