@@ -17,7 +17,6 @@ include $(DEVKITARM)/3ds_rules
 # INCLUDES is a list of directories containing header files
 #
 # NO_SMDH: if set to anything, no SMDH file is generated.
-# ROMFS is the directory which contains the RomFS, relative to the Makefile (Optional)
 # APP_TITLE is the name of the app stored in the SMDH file (Optional)
 # APP_DESCRIPTION is the description of the app stored in the SMDH file (Optional)
 # APP_AUTHOR is the author of the app stored in the SMDH file (Optional)
@@ -32,25 +31,30 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=	include
-#ROMFS		:=	romfs
+APP_TITLE	:=	ButtonSwap
+APP_TITLE_MODE3	:= ButtonSwap-Mode3
+APP_DESCRIPTION := "Patches HID/IR to remap buttons."
+APP_AUTHOR	:=	"Stary & MikahJC"
+ICON		:=	meta/icon.png
+DO_3DSX		:=	no
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-ARCH	:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+ARCH	:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard
 
-CFLAGS	:=	-g -Wall -O2 -mword-relocations \
-			-fomit-frame-pointer -ffunction-sections \
+CFLAGS	:=	-g -Wall -Os -mword-relocations \
+			-fomit-frame-pointer -ffast-math -ffunction-sections -flto \
 			$(ARCH)
 
-CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -DKHAX_DEBUG
+LIBS	:= -lctru -lm -lscenic
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
+CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -DARM_ARCH -w
 
-ASFLAGS	:=	-g $(ARCH)
-LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -std=gnu++11 -w
 
-LIBS	:= -lctru -lm
+ASFLAGS	:=	-g $(ARCH) $(INCLUDE)
+LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map) -Wl,--gc-sections -flto $(LIBS)
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -77,8 +81,6 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
-PICAFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.v.pica)))
-SHLISTFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.shlist)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 
 #---------------------------------------------------------------------------------
@@ -96,7 +98,6 @@ endif
 #---------------------------------------------------------------------------------
 
 export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
-			$(PICAFILES:.v.pica=.shbin.o) $(SHLISTFILES:.shlist=.shbin.o) \
 			$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
@@ -118,28 +119,24 @@ else
 	export APP_ICON := $(TOPDIR)/$(ICON)
 endif
 
-ifeq ($(strip $(NO_SMDH)),)
-	export _3DSXFLAGS += --smdh=$(CURDIR)/$(TARGET).smdh
-endif
-
-ifneq ($(ROMFS),)
-	export _3DSXFLAGS += --romfs=$(CURDIR)/$(ROMFS)
-endif
-
 .PHONY: $(BUILD) clean all
 
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
 $(BUILD):
+	@echo $(SFILES)
 	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).3dsx $(OUTPUT).smdh $(TARGET).elf
+	rm -fr $(BUILD) $(OUTPUT).3dsx $(OUTPUT).smdh $(OUTPUT).elf $(OUTPUT)_stripped.elf $(OUTPUT).cia $(OUTPUT)_mode3.cia
 
+#---------------------------------------------------------------------------------
+send: $(BUILD)
+	3dslink -a 192.168.0.4 $(TARGET).3dsx
 
 #---------------------------------------------------------------------------------
 else
@@ -149,47 +146,40 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-ifeq ($(strip $(NO_SMDH)),)
-$(OUTPUT).3dsx	:	$(OUTPUT).elf $(OUTPUT).smdh
+ifeq ($(strip $(DO_3DSX)), yes)
+.PHONY: all
+all	:	$(OUTPUT).3dsx $(OUTPUT).smdh $(OUTPUT).cia
 else
-$(OUTPUT).3dsx	:	$(OUTPUT).elf
+.PHONY: all
+all    :       $(OUTPUT).cia $(OUTPUT)_mode3.cia
 endif
 
+$(OUTPUT).3dsx	:	$(OUTPUT).elf
 $(OUTPUT).elf	:	$(OFILES)
 
-#---------------------------------------------------------------------------------
-# you need a rule like this for each extension you use as binary data
-#---------------------------------------------------------------------------------
-%.bin.o	:	%.bin
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
+icon.icn: $(TOPDIR)/meta/icon.png
+	@bannertool makesmdh -i $(TOPDIR)/meta/icon.png -s $(APP_TITLE) -l $(APP_DESCRIPTION) -p $(APP_AUTHOR) -o icon.icn
 
-#---------------------------------------------------------------------------------
-# rules for assembling GPU shaders
-#---------------------------------------------------------------------------------
-define shader-as
-	$(eval CURBIN := $(patsubst %.shbin.o,%.shbin,$(notdir $@)))
-	picasso -o $(CURBIN) $1
-	bin2s $(CURBIN) | $(AS) -o $@
-	echo "extern const u8" `(echo $(CURBIN) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"_end[];" > `(echo $(CURBIN) | tr . _)`.h
-	echo "extern const u8" `(echo $(CURBIN) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`"[];" >> `(echo $(CURBIN) | tr . _)`.h
-	echo "extern const u32" `(echo $(CURBIN) | sed -e 's/^\([0-9]\)/_\1/' | tr . _)`_size";" >> `(echo $(CURBIN) | tr . _)`.h
-endef
+banner.bnr: $(TOPDIR)/meta/banner.png $(TOPDIR)/meta/audio.wav
+	@bannertool makebanner -i $(TOPDIR)/meta/banner.png -a $(TOPDIR)/meta/audio.wav -o banner.bnr
 
-%.shbin.o : %.v.pica %.g.pica
-	@echo $(notdir $^)
-	@$(call shader-as,$^)
+icon_mode3.icn: $(TOPDIR)/meta/icon_mode3.png
+	@bannertool makesmdh -i $(TOPDIR)/meta/icon_mode3.png -s $(APP_TITLE_MODE3) -l $(APP_DESCRIPTION) -p $(APP_AUTHOR) -o icon_mode3.icn
 
-%.shbin.o : %.v.pica
-	@echo $(notdir $<)
-	@$(call shader-as,$<)
+banner_mode3.bnr: $(TOPDIR)/meta/banner_mode3.png $(TOPDIR)/meta/audio.wav
+	@bannertool makebanner -i $(TOPDIR)/meta/banner_mode3.png -a $(TOPDIR)/meta/audio.wav -o banner_mode3.bnr
 
-%.shbin.o : %.shlist
-	@echo $(notdir $<)
-	@$(call shader-as,$(foreach file,$(shell cat $<),$(dir $<)/$(file)))
+$(OUTPUT)_stripped.elf: $(OUTPUT).elf
+	@cp $(OUTPUT).elf $(OUTPUT)_stripped.elf
+	@$(PREFIX)strip $(OUTPUT)_stripped.elf
 
--include $(DEPENDS)
+$(OUTPUT).cia: $(OUTPUT)_stripped.elf banner.bnr icon.icn
+	@makerom -f cia -o $(OUTPUT).cia -rsf $(TOPDIR)/meta/cia.rsf -target t -exefslogo -elf $(OUTPUT)_stripped.elf -icon icon.icn -banner banner.bnr -ver 1040
+	@echo "built ... $(notdir $@)"
+
+$(OUTPUT)_mode3.cia: $(OUTPUT)_stripped.elf banner_mode3.bnr icon_mode3.icn
+	@makerom -f cia -o $(OUTPUT)_mode3.cia -rsf $(TOPDIR)/meta/cia_mode3.rsf -target t -exefslogo -elf $(OUTPUT)_stripped.elf -icon icon_mode3.icn -banner banner_mode3.bnr -ver 1040
+	@echo "built ... $(notdir $@)"
 
 #---------------------------------------------------------------------------------------
 endif
