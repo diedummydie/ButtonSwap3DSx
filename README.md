@@ -19,7 +19,7 @@ You will need a working setup of the devkitARM toolchain for 3DS, follow [this g
 You will also need the [ScenicRoute](https://github.com/Stary2001/ScenicRoute) library by Stary2001.  Clone it, then run make install in the ScenicRoute directory.
 Finally, clone this repository.
 
-The instructions for each type of mapping are provided in [source/injected.s](../blob/master/source/injected.s).  I've provided a Java program to generate the correct button masks and coordinate values.  When you have saved your mappings into this file, you will need to compile it.  To build, change to the ButtonSwap3DS directory in a terminal, then run make.
+The instructions for each type of mapping are provided in [source/injected.s](../master/source/injected.s).  I've provided a Java program to generate the correct button masks and coordinate values.  When you have saved your mappings into this file, you will need to compile it.  To build, change to the ButtonSwap3DS directory in a terminal, then run make.
 ### Each data field, and how to get it
 #### Button Masks
 This is the data that defines which buttons will activate the remapping.  Either use the provided program, or manually calculate the mask using [this table](https://www.3dbrew.org/wiki/HID_Shared_Memory#PAD_State).
