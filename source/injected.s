@@ -104,7 +104,6 @@ ldr r0, [r0]                            @
 
 @ Add mappings here
 
-
 @=============================@
 @         TOUCHSCREEN         @
 @=============================@
@@ -165,6 +164,9 @@ pop {pc}    @
 @ Swapping functions @
 @====================@
 .single:             @
+and r1, r0, r3       @
+cmp r1, #0           @
+bxeq r14             @
 and r1, r0, r3       @
 cmp r1, r3           @
 eorne r2, r0, r4     @
