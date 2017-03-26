@@ -130,7 +130,7 @@ str r4, [r1]      @
 @     Mapping syntax     @
 @ ldr r3, =[button mask] @
 @ ldr r5, =[cpad value]  @
-@ bl .touch              @
+@ bl .cpad               @
 @========================@
 @    Some C-pad values   @
 @ Left  = 0x000800       @
@@ -142,7 +142,6 @@ ldr r4, =0x800800        @
 @========================@
 
 @ Add mappings here
-
 
 @=================@
 ldr r1, =0x10df28 @
