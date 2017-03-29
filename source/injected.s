@@ -97,12 +97,13 @@ ldr r0, [r0]                            @
 @          Mapping syntax            @
 @ ldr r3, =[button mask]             @
 @ ldr r4, =[XOR mask]                @
-@ bl .single for one button trigger  @
+@ bl .anyMap for any button in mask  @
 @            --- OR ---              @
-@ bl .combo for multi-button trigger @
+@ bl .allMap for all buttons in mask @
 @====================================@
 
 @ Add mappings here
+
 
 @=============================@
 @         TOUCHSCREEN         @
@@ -162,16 +163,16 @@ pop {pc}    @
 @====================@
 @ Swapping functions @
 @====================@
-.single:             @
-and r1, r0, r3       @
-cmp r1, #0           @
-bxeq r14             @
-and r1, r0, r3       @
-cmp r1, r3           @
-eorne r2, r0, r4     @
-bx r14               @
+.anyMap:             @
+and r1, r0, r3       @ Extract button values using mask
+cmp r1, #0           @ Check if all buttons are pressed
+bxeq r14             @ If so, return
+@and r1, r0, r3      @ Not sure why we're extracting values again
+cmp r1, r3           @ Check if button values do not equal button mask.
+eorne r2, r0, r4     @ If so, XOR temp HID register
+bx r14               @ Return
                      @
-.combo:              @
+.allMap:             @
 and r1, r0, r3       @
 cmp r1, #0           @
 eoreq r2, r0, r4     @
