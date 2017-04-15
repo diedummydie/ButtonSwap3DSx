@@ -22,15 +22,16 @@ Finally, clone this repository.
 The instructions for each type of mapping are provided in [source/injected.s](../master/source/injected.s).  I've provided a Java program to generate the correct button masks and coordinate values.  When you have saved your mappings into this file, you will need to compile it.  To build, change to the ButtonSwap3DS directory in a terminal, then run make.
 ### Each data field, and how to get it
 #### Button Masks
-This is the data that defines which buttons will activate the remapping.  Either use the provided program, or manually calculate the mask using [this table](https://www.3dbrew.org/wiki/HID_Shared_Memory#PAD_State).
-#### XOR Mask
-This is the swapping data for buttons.  It is in the same format as the button masks.  This mask needs the buttons that will be used to activate the remap, and the buttons you want activated by the remap.
-
-For a 1:1 button swap, the button masks and xor masks will be the same.  For example, if you want to swap A with B, and vice versa, both the button and xor masks would be 0x3.
-
-For a 1:1 button map, choos your button mask based on which button you want to swap.  For example, if you wanted X to press Y, your button mask would be ```0x400```.  Then, your XOR mask would need to include both X and Y, since we want to press Y and un-press X.  This mask would be ```0xC00```.
-
-For a combo swap (e.g. L+B=R), this mask would require the L, B, and R fields to be active (a mask of ```0x302```), while the button mask would just be the L and B fields (a mask of ```0x202```).
+This is the data that defines which buttons will activate the remapping and which buttons will be pressed.  Either use the provided program, or manually calculate the mask using [this table](https://www.3dbrew.org/wiki/HID_Shared_Memory#PAD_State).
+For example, this code would swap A and B:
+```
+ldr r4, =0x1
+ldr r5, =0x2
+bl .button
+ldr r4, =0x2
+ldr r5, =0x1
+bl .button
+```
 ##### The next two data fields are six digit numbers.  The first 3 digits are the Y coordinate data, and the last 3 digits are the X coordinate data.
 #### Touchscreen Data
 The data that will be sent as the touchscreen.  Use the provided tool to generate this data.

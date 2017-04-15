@@ -79,58 +79,56 @@ mov pc, r14
 @ DO NOT MODIFY R0                      @
 @ R0 = Actual HID value                 @
 @ R1 = Button check register            @
-@ R2 = Modified HID value               @
-@ R3 = Button Mask                      @
-@ R4 = XOR mask                         @
-@ R5 = Arguments for functions          @
+@ R2 = Press HID Register               @
+@ R3 = Unpress HID Register             @
+@ R4 = Button mask                      @
+@ R5 = Press mask                       @
+@ R6 = Arguments for functions          @
 @=======================================@
 @ Initialization                        @
 push {r14}                              @
 ldr r0, =0x1ec46000                     @
-ldr r2, [r0]                            @
 ldr r0, [r0]                            @
+mov r2, #0                              @
+mov r3, #0                              @
 @=======================================@
 
 @====================================@
 @              BUTTONS               @
 @====================================@
 @          Mapping syntax            @
-@ ldr r3, =[button mask]             @
-@ ldr r4, =[XOR mask]                @
-@ bl .anyMap for any button in mask  @
-@            --- OR ---              @
-@ bl .allMap for all buttons in mask @
+@ ldr r4, =[button mask]             @
+@ ldr r5, =[press mask]              @
+@ bl .button                         @
 @====================================@
 
 @ Add mappings here
-
 
 @=============================@
 @         TOUCHSCREEN         @
 @=============================@
 @ Mapping syntax              @
-@ ldr r3, =[button mask]      @
-@ ldr r5, =[touchscreen data] @
+@ ldr r4, =[button mask]      @
+@ ldr r6, =[touchscreen data] @
 @ bl .touch                   @
 @=============================@
-ldr r4, =0x2000000            @
+ldr r5, =0x2000000            @
 @=============================@
 
 @ Add mappings here
 
-
 @=================@
 .tp_end:          @
 ldr r1, =0x10df24 @
-str r4, [r1]      @
+str r5, [r1]      @
 @=================@
 
 @========================@
 @          CPAD          @
 @========================@
 @     Mapping syntax     @
-@ ldr r3, =[button mask] @
-@ ldr r5, =[cpad value]  @
+@ ldr r4, =[button mask] @
+@ ldr r6, =[cpad value]  @
 @ bl .cpad               @
 @========================@
 @    Some C-pad values   @
@@ -139,20 +137,23 @@ str r4, [r1]      @
 @ Up    = 0x7FF000       @
 @ Down  = 0x800000       @
 @========================@
-ldr r4, =0x800800        @
+ldr r5, =0x800800        @
 @========================@
 
 @ Add mappings here
 
 @=================@
 ldr r1, =0x10df28 @
-str r4, [r1]      @
+str r5, [r1]      @
 @=================@
 
 @============================================@
 @ load our HID memory with final button data @
 ldr r1, =0x10df20                            @
-str r2, [r1]                                 @
+orr r0, r0, r3                               @
+orr r0, r0, r2                               @
+sub r0, r0, r2                               @
+str r0, [r1]                                 @
 @============================================@
 
 @===========@
@@ -163,34 +164,26 @@ pop {pc}    @
 @====================@
 @ Swapping functions @
 @====================@
-.anyMap:             @
-and r1, r0, r3       @ Extract button values using mask
+.button:             @
+and r1, r0, r4       @ Extract button values
 cmp r1, #0           @ Check if all buttons are pressed
-bxeq r14             @ If so, return
-@and r1, r0, r3      @ Not sure why we're extracting values again
-cmp r1, r3           @ Check if button values do not equal button mask.
-eorne r2, r0, r4     @ If so, XOR temp HID register
-bx r14               @ Return
-                     @
-.allMap:             @
-and r1, r0, r3       @
-cmp r1, #0           @
-eoreq r2, r0, r4     @
+orreq r2, r2, r5     @ If so, add press register to + HID
+orreq r3, r3, r4     @ And add button mask to - HID to unpress trigger buttons
 bx r14               @
                      @
 .touch:              @
-and r1, r3, r0       @
-cmp r1, #0           @
-moveq r4, r5         @
-eoreq r2, r2, r3     @
+and r1, r4, r0       @ Extract buttons
+cmp r1, #0           @ Check if all buttons are pressed
+moveq r5, r6         @ Move touchscreen data to register
+orreq r3, r3, r4     @ Un-press buttons
 beq .tp_end          @
 bxne r14             @
                      @
 .cpad:               @
-and r1, r3, r0       @
-cmp r1, #0           @
-eoreq r4, r5         @
-eoreq r2, r2, r3     @
+and r1, r4, r0       @ Extract buttons
+cmp r1, #0           @ Check if all buttons are pressed
+eoreq r5, r7         @ Move c-pad data to register
+orreq r3, r3, r4     @ Un-press buttons
 bx r14               @
 @====================@
 

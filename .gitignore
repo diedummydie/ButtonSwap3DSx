@@ -3,8 +3,10 @@
 *.elf
 *.cia
 *.zip
+*.7z
 *.o
 *.d
 input_proc/output*
 input_proc/build*
 input_loader/build
+build/
