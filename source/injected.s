@@ -137,7 +137,7 @@ str r5, [r1]      @
 @ Up    = 0x7FF000       @
 @ Down  = 0x800000       @
 @========================@
-ldr     r5, =0x80080     @
+ldr     r5, =0x800800    @
 @========================@
 
 @ Add mappings here
@@ -182,7 +182,7 @@ bxne    r14          @
 .cpad:               @
 and     r1, r4, r0   @ Extract buttons
 cmp     r1, #0       @ Check if all buttons are pressed
-eoreq   r5, r7       @ Move c-pad data to register
+eoreq   r5, r6       @ Move c-pad data to register
 orreq   r3, r3, r4   @ Un-press buttons
 bx      r14          @
 @====================@
