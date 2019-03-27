@@ -6,17 +6,14 @@ Swap **Nintendo 3DS** buttons to the layout of Xbox and PlayStation controllers
 On Xbox and PlayStation consoles, the **Accept/Action** button is in the bottom 
 position, and the button for **Back/Cancel** is to the right. Nintendo layout 
 is the opposite. Nintendo came first with the release of the NES in 1983, but 
-some may prefer Xbox and PlayStation layout.
-
-Swaps A with B and X with Y, no other buttons affected.
+some may prefer Xbox and PlayStation layout. This swaps A with B and X with Y, 
+no other buttons affected. Remains in effect until you restart.
 
 ## How to Use
 Install ButtonSwap.cia on your unlocked 3DS using a CIA manager like FBI.
 
 Launch the app, then press the Home button to get back to the normal 3DS menu
 to start a game. 
-
-Remains in effect until you restart.
 
 ## Credits
 Memory patching code from BootNTR
@@ -25,7 +22,7 @@ Shinyquagsire for his writeup on redirecting input over WiFi.
 
 Stary & Kazo for InputRedirector, upon which almost all of this is based.
 
-## How to Use
+## How to customize
 Install the ButtonSwapNTR cia on your 3ds.
 
 Not really configurable right now, but can be changed if you know ASM.
