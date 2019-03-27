@@ -1,9 +1,17 @@
-# Limitations
-* I don't hook the IR service yet, so no zl/zr or c-stick. However, it is why I started this, so I'll be looking into it.
-* Home and Power cannot be mapped the same way.  They are processed by the [MCU](https://3dbrew.org/wiki/Hardware#Auxiliary_Microcontroller_.28MCU.29).
+# ButtonSwap3DS
+This swaps 3DS button layout to match Xbox and PlayStation controllers.
+On both Xbox and PlayStation, the Accept/Action button is in the 6 o'clock 
+(bottom) position, and the button for Back/Cancel is at 3 o'clock (right). 
+Similarly in gameplay, the bottom button is often Attack/Interact, while the 
+right button cancels attacks or performs some supplemental, non-primary 
+function. Nintendo layout is the opposite.
+
+Nintendo's B-A layout came first, with the release of the NES in 1983, so 
+if anyone is 'backwards', it's technically Xbox and PlayStation. But if you 
+prefer the layout of those systems, this is your fix.
 
 ## Credits
-Memory patching code taken from BootNTR
+Memory patching code from BootNTR
 
 Shinyquagsire for his writeup on redirecting input over WiFi.
 
