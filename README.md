@@ -16,7 +16,7 @@ Step Zero: Download the latest build from Releases (link tbd), and install Butto
 
 ---
 
-##[Download](README.md)
+## [Download](README.md)
 
 ---
 
