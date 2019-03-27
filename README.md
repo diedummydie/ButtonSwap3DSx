@@ -1,18 +1,16 @@
-# ButtonSwap3DS
-Swap Nintendo 3DS button layout to match Xbox and PlayStation controllers.
+# ButtonSwap3DSx
+Swap **Nintendo 3DS** buttons to the layout of Xbox and PlayStation controllers
 
 ![swap A with B and X with
 Y](https://gitlab.com/aiden-vrenna/buttonswap3dsx/raw/master/meta/ABXY-Buttons-Red.jpg)
 
-On both Xbox and PlayStation, the Accept/Action button is in the 6 o'clock 
-(bottom) position, and the button for Back/Cancel is at 3 o'clock (right). 
-Similarly in gameplay, the bottom button is often Attack/Interact, while the 
-right button cancels attacks or performs some supplemental, non-primary 
-function. Nintendo layout is the opposite.
+The ABXY buttons are not just labels. On Xbox and PlayStation, the 
+**Accept/Action** button is in the bottom position, and the button for 
+**Back/Cancel** is to the right. Nintendo layout is the opposite.
 
-Nintendo's B-A layout came first, with the release of the NES in 1983, so 
-if anyone is 'backwards', it's technically Xbox and PlayStation. But if you 
-prefer the layout of those systems, this is your fix.
+Nintendo's B-A layout came first, with the release of the NES in 1983. 
+If anyone is backwards, it's technically Xbox and PlayStation, but some people 
+may prefer the layout of those systems.
 
 ## Credits
 Memory patching code from BootNTR
