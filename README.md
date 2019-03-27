@@ -8,15 +8,15 @@ On Xbox and PlayStation consoles, the **Accept/Action** button is in the bottom 
 
 # How to Use
 
-Download the latest build from Releases (link tbd), and install ButtonSwap.cia on your [unlocked (cfw)](https://3ds.hacks.guide) **Nintendo 3DS** using a CIA manager like FBI.
+Step Zero: Download the latest build from Releases (link tbd), and install ButtonSwap.cia on your [unlocked (cfw)](https://3ds.hacks.guide) **Nintendo 3DS** using a CIA manager like FBI. This only needs to be done once.
 
-Launch the app, then press the Home button to get back to the normal 3DS menu and start a game. 
+1. Launch the app
+2. Press Home to return to the normal 3DS menu
+3. Start a game
 
 ---
----
----
----
----
+
+![spacer](meta/spacer-200.png)
 
 #### About Mode3 Build
 
