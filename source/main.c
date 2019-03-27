@@ -3,7 +3,7 @@
 #include <scenic/proc.h>
 #include <scenic/dma.h>
 
-#define HID_PID 0x10
+#define HID_PID        0x10
 
 // 11.0 HID
 #define HID_PATCH1_LOC 0x101de0
@@ -12,8 +12,8 @@
 #define HID_CAVE_LOC   0x1094B8
 
 #define HID_DAT_LOC	   0x10df00
-#define HID_TS_RD_LOC 0x10df04
-#define HID_TS_WR_LOC 0x10df08
+#define HID_TS_RD_LOC  0x10df04
+#define HID_TS_WR_LOC  0x10df08
 
 scenic_process *hid;
 
@@ -25,7 +25,7 @@ int main()
 	gfxInitDefault();
 	consoleInit(GFX_BOTTOM, NULL);
 
-	printf("injecting into hid..\n");
+	printf("injecting into HID memory...\n");
 
 	hid = proc_open(0x10, 0);
 
@@ -43,7 +43,7 @@ int main()
 
 	if (test != 0)
 	{
-		printf("Already patched? \n");
+		printf("already patched\n");
 		err = true;
 	}
 	else
@@ -84,7 +84,7 @@ int main()
 		{
 			if(!proc_hook(hid, HID_PATCH3_LOC, HID_CAVE_LOC, (u32*)&read_input, read_input_sz))
 			{
-				printf("Hook failed!\n");
+				printf("hook failed\n");
 				err = true;
 			}
 			dma_kill_cache();
@@ -95,11 +95,11 @@ int main()
 
 	if(err)
 	{
-		printf("An error occured! Press START to exit!\n");
+		printf("An error occured. Press START to exit.\n");
 	}
 	else
 	{
-		printf("Press HOME for use with NTR-Mode3, or START to exit!\n");
+		printf("\nPress HOME for use with NTR-Mode3, \n or START to exit.\n");
 	}
 
 	while (aptMainLoop())

@@ -14,6 +14,8 @@ Step Zero: Download the latest build from [Releases](https://github.com/diedummy
 2. Press Home to return to the normal 3DS menu
 3. Start a game
 
+Works with all versions of 3DS and 2DS, old/new/XL/non-XL.
+
 ---
 ## [Download](https://github.com/diedummydie/ButtonSwap3DSx/releases/tag/1.0)
 ![spacer](meta/spacer-64.png)
@@ -39,14 +41,14 @@ The instructions for each type of mapping are provided in source/injected.s.  Mi
 For example, this is the code for the ButtonSwap3DSx configuration which is included in the release here.
 
 ```asm
-@ Swap A|B
+@ swap A:B
 ldr r4, =0x1
 ldr r5, =0x2
 bl .button
 ldr r4, =0x2
 ldr r5, =0x1
 bl .button
-@ Swap X|Y
+@ swap X:Y
 ldr r4, =0x400
 ldr r5, =0x800
 bl .button

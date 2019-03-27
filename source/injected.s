@@ -102,8 +102,6 @@ mov     r3, #0                          @
 @ bl .button                         @
 @====================================@
 
-@ Add mappings here
-
 @ Swap A|B
 ldr r4, =0x1
 ldr r5, =0x2
