@@ -4,13 +4,16 @@ Swap **Nintendo 3DS** buttons to the layout of Xbox and PlayStation controllers
 ![swap A with B and X with
 Y](https://gitlab.com/aiden-vrenna/buttonswap3dsx/raw/master/meta/ABXY-Buttons-Red.jpg)
 
-The ABXY buttons are not just labels. On Xbox and PlayStation, the 
-**Accept/Action** button is in the bottom position, and the button for 
-**Back/Cancel** is to the right. Nintendo layout is the opposite.
+On Xbox and PlayStation, the **Accept/Action** button is in the bottom 
+position, and the button for **Back/Cancel** is to the right. Nintendo layout 
+is the opposite. Nintendo came first with the release of the NES in 1983, but 
+if you prefer Xbox and PlayStation layout, this is for you.
 
-Nintendo's B-A layout came first, with the release of the NES in 1983. 
-If anyone is backwards, it's technically Xbox and PlayStation, but some people 
-may prefer the layout of those systems.
+## How to Use
+Install ButtonSwap.cia on your unlocked 3DS using a CIA manager like FBI.
+
+Launch the app, then press the Home button to get back to the normal 3DS menu
+to start a game. Remains in effect until you restart.
 
 ## Credits
 Memory patching code from BootNTR
