@@ -6,7 +6,7 @@ Swap **Nintendo 3DS** buttons with the layout of Xbox and PlayStation controller
 
 On Xbox and PlayStation consoles, the **Accept/Action** button is in the bottom position, and the button for **Back/Cancel** is to the right. Nintendo layout is the opposite. Nintendo was first on the scene with the NES released in 1983, but some may still prefer Xbox and PlayStation layout. This swaps A with B and X with Y, no other buttons affected. Remains in effect until you restart.
 
-## How to Use
+# How to Use
 
 Download the latest build from Releases (link tbd), and install ButtonSwap.cia on your [unlocked (cfw)](https://3ds.hacks.guide) **Nintendo 3DS** using a CIA manager like FBI.
 
@@ -15,12 +15,14 @@ Launch the app, then press the Home button to get back to the normal 3DS menu an
 ---
 ---
 ---
+---
+---
 
-### About Mode3 Build
+#### About Mode3 Build
 
 ButtonSwap-Mode3 is a special build for running ButtonSwap with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
 
-### How to customize
+#### How to customize
 
 ButtonSwap3DS(x) isn't really configurable unless you know how to write assembly language code for ARM processors. This project exists so that you don't have to compile it yourself.
 
@@ -53,7 +55,7 @@ ldr r5, =0x400
 bl .button
 ```
 
-### Acknowledgements
+#### Acknowledgements
 
 44670 for memory patching code from [BootNTR](https://github.com/44670/BootNTR)
 
