@@ -13,8 +13,8 @@ Download the latest build from Releases (link tbd), and install ButtonSwap.cia o
 Launch the app, then press the Home button to get back to the normal 3DS menu and start a game. 
 
 ---
-
-<span style="color:gray">
+---
+---
 
 ### About Mode3 Build
 
@@ -35,8 +35,6 @@ Finally, clone this repository. If you would prefer to work with the upstream pr
 The instructions for each type of mapping are provided in source/injected.s.  Micahjc provided a Java app to generate the correct button masks and coordinate values. When you have saved your mappings into this file, you will need to compile it. To build, change to the ButtonSwap3DS directory in a terminal, then run make.
 
 For example, this is the code for the ButtonSwap3DSx configuration which is included in the release here.
-
-</span>
 
 ```asm
 @ Swap A|B
