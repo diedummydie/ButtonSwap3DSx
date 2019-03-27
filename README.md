@@ -21,25 +21,12 @@ and start a game.
 
 ### About Mode3 Build
 
-ButtonSwap-Mode3 is a special build of ButtonSwap for running it with extended memory games on old3DS. **There is no need to install ButtonSwap-Mode3** on new3DS since the original one works just fine.
-
-### Acknowledgements
-
-44670 for memory patching code from [BootNTR](https://github.com/44670/BootNTR)
-
-Shinyquagsire23 for his writeup on [redirecting input over
-WiFi](http://douevenknow.us/post/139673444953/redirecting-3ds-input-over-wifi)
-
-Stary2001 & Kazo for [InputRedirection](https://github.com/Stary2001/InputRedirection)
-
-Mikahjc for [ButtonSwap3DS](https://github.com/mikahjc/ButtonSwap3DS), 
-from which this project was forked
+ButtonSwap-Mode3 is a special build of ButtonSwap for running it with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
 
 ### How to customize
 
-Not really configurable, unless you know how to write assembly language code for
-ARM processors. This project exists so that you don't have to compile it
-yourself.
+ButtonSwap3DS(x) isn't really configurable unless you know how to write assembly
+language code for ARM processors. This project exists so that you don't have to compile it yourself.
 
 If you do wish to customize, you will need a working setup of the [devkitARM](https://www.3dbrew.org/wiki/Setting_up_Development_Environment) toolchain for 3DS.
 
@@ -54,10 +41,13 @@ to your $PATH or install them somewhere already in your $PATH like /usr/local/bi
 Finally, clone this repository. If you would prefer to work with the upstream
 project, you may need to remove references to SeedDB in cia.rsf and cia_mode3.rsf as I did.
 
-The instructions for each type of mapping are provided in [source/injected.s](../master/source/injected.s). Micahjc provided a Java app to generate the correct button masks and coordinate values. When you have saved your mappings into this file, you will need to compile it. To build, change to the ButtonSwap3DS directory in a terminal, then run make.
+The instructions for each type of mapping are provided in source/injected.s. 
+Micahjc provided a Java app to generate the correct button masks and coordinate values. When you have saved your mappings into this file, you will need to 
+compile it. To build, change to the ButtonSwap3DS directory in a terminal, 
+then run make.
 
-For example, this is the code I wrote for the ButtonSwap3DSx configuration which
-is included in the compiled release here.
+For example, this is the code for the ButtonSwap3DSx configuration which
+is included in the release here.
 
 ```asm
 @ Swap A|B
@@ -75,4 +65,16 @@ ldr r4, =0x800
 ldr r5, =0x400
 bl .button
 ```
+
+### Acknowledgements
+
+44670 for memory patching code from [BootNTR](https://github.com/44670/BootNTR)
+
+Shinyquagsire23 for his writeup on [redirecting input over
+WiFi](http://douevenknow.us/post/139673444953/redirecting-3ds-input-over-wifi)
+
+Stary2001 & Kazo for [InputRedirection](https://github.com/Stary2001/InputRedirection)
+
+Mikahjc for [ButtonSwap3DS](https://github.com/mikahjc/ButtonSwap3DS), 
+from which this project was forked
 
