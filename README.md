@@ -19,9 +19,11 @@ manager like FBI.
 Launch the app, then press the Home button to get back to the normal 3DS menu
 and start a game. 
 
+---
+
 ### About Mode3 Build
 
-ButtonSwap-Mode3 is a special build of ButtonSwap for running it with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
+ButtonSwap-Mode3 is a special build for running ButtonSwap with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
 
 ### How to customize
 
