@@ -4,7 +4,7 @@ Swap **Nintendo 3DS** buttons to the layout of Xbox and PlayStation controllers
 ![swap A with B and X with
 Y](https://gitlab.com/aiden-vrenna/buttonswap3dsx/raw/master/meta/ABXY-Buttons-Red.jpg)
 
-On Xbox and PlayStation, the **Accept/Action** button is in the bottom 
+On Xbox and PlayStation consoles, the **Accept/Action** button is in the bottom 
 position, and the button for **Back/Cancel** is to the right. Nintendo layout 
 is the opposite. Nintendo came first with the release of the NES in 1983, but 
 if you prefer Xbox and PlayStation layout, this is for you.
