@@ -8,7 +8,7 @@ On Xbox and PlayStation consoles, the **Accept/Action** button is in the bottom 
 
 # How to Use
 
-Step Zero: Download the latest build from Releases (link tbd), and install ButtonSwap.cia on your [unlocked (cfw)](https://3ds.hacks.guide) **Nintendo 3DS** using a CIA manager like FBI. This only needs to be done once.
+Step Zero: Download the latest build from [Releases](https://github.com/diedummydie/ButtonSwap3DSx/releases/tag/1.0), and install ButtonSwap.cia on your [unlocked (cfw)](https://3ds.hacks.guide) **Nintendo 3DS** using a CIA manager like FBI. This only needs to be done once.
 
 1. Launch the app
 2. Press Home to return to the normal 3DS menu
