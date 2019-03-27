@@ -52,7 +52,6 @@ AccessControlInfo:
    - Shop
    - Shell
    - CategoryHomeMenu
-   - SeedDB
   IoAccessControl:
    - FsMountNand
    - FsMountNandRoWrite
