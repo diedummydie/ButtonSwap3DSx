@@ -104,6 +104,21 @@ mov     r3, #0                          @
 
 @ Add mappings here
 
+@ Swap A|B
+ldr r4, =0x1
+ldr r5, =0x2
+bl .button
+ldr r4, =0x2
+ldr r5, =0x1
+bl .button
+@ Swap X|Y
+ldr r4, =0x400
+ldr r5, =0x800
+bl .button
+ldr r4, =0x800
+ldr r5, =0x400
+bl .button
+
 @=============================@
 @         TOUCHSCREEN         @
 @=============================@
