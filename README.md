@@ -1,5 +1,9 @@
 # ButtonSwap3DS
 This swaps 3DS button layout to match Xbox and PlayStation controllers.
+
+![swap A with B and X with
+Y](https://gitlab.com/aiden-vrenna/buttonswap3ds/raw/master/meta/cia.rsf)
+
 On both Xbox and PlayStation, the Accept/Action button is in the 6 o'clock 
 (bottom) position, and the button for Back/Cancel is at 3 o'clock (right). 
 Similarly in gameplay, the bottom button is often Attack/Interact, while the 
