@@ -15,11 +15,7 @@ Step Zero: Download the latest build from Releases (link tbd), and install Butto
 3. Start a game
 
 ---
-
-## [Download](README.md)
-
----
-
+## [Download](https://github.com/diedummydie/ButtonSwap3DSx/releases/tag/1.0)
 ![spacer](meta/spacer-64.png)
 
 ### About Mode3 Build
@@ -59,7 +55,7 @@ ldr r5, =0x400
 bl .button
 ```
 
-### Acknowledgements
+## Acknowledgements
 
 44670 for memory patching code from [BootNTR](https://github.com/44670/BootNTR)
 
@@ -67,5 +63,5 @@ Shinyquagsire23 for his writeup on [redirecting input over WiFi](http://douevenk
 
 Stary2001 & Kazo for [InputRedirection](https://github.com/Stary2001/InputRedirection)
 
-Mikahjc for [ButtonSwap3DS](https://github.com/mikahjc/ButtonSwap3DS), from which this project was forked
+Mikahjc for [ButtonSwap3DS](https://github.com/mikahjc/ButtonSwap3DS) from which this project was forked
 
