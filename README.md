@@ -36,7 +36,7 @@ The instructions for each type of mapping are provided in [source/injected.s](..
 #### Button Masks
 This is the data that defines which buttons will activate the remapping and which buttons will be pressed.  Either use the provided program, or manually calculate the mask using [this table](https://www.3dbrew.org/wiki/HID_Shared_Memory#PAD_State).
 For example, this code would swap A and B:
-```assembly
+```asm
 ldr r4, =0x1
 ldr r5, =0x2
 bl .button
