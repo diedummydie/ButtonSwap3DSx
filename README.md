@@ -14,13 +14,15 @@ Launch the app, then press the Home button to get back to the normal 3DS menu an
 
 ---
 
->### About Mode3 Build
->
->ButtonSwap-Mode3 is a special build for running ButtonSwap with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
->
->### How to customize
->
->ButtonSwap3DS(x) isn't really configurable unless you know how to write assembly language code for ARM processors. This project exists so that you don't have to compile it yourself.
+<span style="color:gray">
+
+### About Mode3 Build
+
+ButtonSwap-Mode3 is a special build for running ButtonSwap with extended memory games on old3DS. There is no need to install ButtonSwap-Mode3 on new3DS since the main edition works just fine.
+
+### How to customize
+
+ButtonSwap3DS(x) isn't really configurable unless you know how to write assembly language code for ARM processors. This project exists so that you don't have to compile it yourself.
 
 If you do wish to customize, you will need a working setup of the [devkitARM](https://www.3dbrew.org/wiki/Setting_up_Development_Environment) toolchain for 3DS.
 
@@ -33,6 +35,8 @@ Finally, clone this repository. If you would prefer to work with the upstream pr
 The instructions for each type of mapping are provided in source/injected.s.  Micahjc provided a Java app to generate the correct button masks and coordinate values. When you have saved your mappings into this file, you will need to compile it. To build, change to the ButtonSwap3DS directory in a terminal, then run make.
 
 For example, this is the code for the ButtonSwap3DSx configuration which is included in the release here.
+
+</span>
 
 ```asm
 @ Swap A|B
