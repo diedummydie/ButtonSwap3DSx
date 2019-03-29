@@ -25,7 +25,7 @@ int main()
 	gfxInitDefault();
 	consoleInit(GFX_BOTTOM, NULL);
 
-	printf("injecting into HID memory...\n");
+	printf("Injecting into HID memory... ");
 
 	hid = proc_open(0x10, 0);
 
@@ -99,7 +99,13 @@ int main()
 	}
 	else
 	{
-		printf("\nSuccess\n\nPress HOME to return to your 3DS menu.\n");
+		printf("Success\n");
+		printf(" \n");
+		printf("%*s%s", 19, "", "Y\n");
+		printf("%*s%s", 17, "", "X   B\n");
+		printf("%*s%s", 19, "", "A\n");
+		printf(" \n");
+		printf("\nPress HOME to return to 3DS menu.\n");
 	}
 
 	while (aptMainLoop())
