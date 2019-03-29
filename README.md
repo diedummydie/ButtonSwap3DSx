@@ -17,7 +17,7 @@ Step Zero: [Download](https://github.com/diedummydie/ButtonSwap3DSx/releases/lat
 Works with all versions of 3DS and 2DS, old/new/XL/non-XL.
 
 ---
-## [Download](https://github.com/diedummydie/ButtonSwap3DSx/releases/latest)
+## [![Download](meta/banner.png) Download](https://github.com/diedummydie/ButtonSwap3DSx/releases/latest)
 
 ![spacer](meta/spacer-64.png)
 
