@@ -99,7 +99,7 @@ int main()
 	}
 	else
 	{
-		printf("\nPress HOME for use with NTR-Mode3, \n or START to exit.\n");
+		printf("\nSuccess\n\nPress HOME to return to your 3DS menu.\n");
 	}
 
 	while (aptMainLoop())
