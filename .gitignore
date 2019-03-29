@@ -6,6 +6,7 @@
 *.7z
 *.o
 *.d
+*.psd
 input_proc/output*
 input_proc/build*
 input_loader/build
