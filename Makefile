@@ -33,8 +33,8 @@ DATA		:=	data
 INCLUDES	:=	include
 APP_TITLE	:=	ButtonSwap
 APP_TITLE_MODE3	:= ButtonSwap-Mode3
-APP_DESCRIPTION := "Patches HID/IR to remap buttons."
-APP_AUTHOR	:=	"Stary & MikahJC"
+APP_DESCRIPTION := "Swap ABXY buttons"
+APP_AUTHOR	:=	"Die, dummy, die!"
 ICON		:=	meta/icon.png
 DO_3DSX		:=	no
 
@@ -128,6 +128,7 @@ $(BUILD):
 	@echo $(SFILES)
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	rm -fr $(OUTPUT).elf $(OUTPUT)_stripped.elf
 
 #-------------------------------------------------------------------------------
 clean:
